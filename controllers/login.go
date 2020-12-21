@@ -21,6 +21,13 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	token, err := genToken(u.Username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, "unknown error")
+		return
+	}
+
+	c.JSON(http.StatusOK, token)
 }
 
 func Logout(c *gin.Context) {
